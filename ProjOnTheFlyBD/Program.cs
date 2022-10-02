@@ -252,7 +252,7 @@ namespace ProjOnTheFlyBD
             Console.WriteLine(" Opção 2 : Editar companhia aerea");
             Console.WriteLine(" Opção 3 : Editar aeronave");
             Console.WriteLine(" Opção 4 : Editar voo");
-            Console.WriteLine(" Opção 5 : Editar valor passagem");
+            Console.WriteLine(" Opção 5 : Editar passagem");
             Console.WriteLine(" Opção 6 : Voltar ao Menu Iniciar");
             Console.WriteLine(" Opção 0 : Sair");
 
@@ -300,7 +300,7 @@ namespace ProjOnTheFlyBD
                     case 5:
                         Console.WriteLine("Editar passagem");
                         Console.Clear();
-                        //passagemVoo.AlterarPrecoPassagem();
+                        passagemVoo.AlteraDadoPassagem();
                         break;
 
                     case 6:

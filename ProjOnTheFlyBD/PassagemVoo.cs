@@ -14,7 +14,7 @@ namespace ProjetoOnTheFlyBD
         public string IdVoo { get; set; }
         public DateTime DataCadastro { get; set; }
         public float Valor { get; set; }
-        public char Situacao { get; set; }
+        public string Situacao { get; set; }
 
         Banco conn = new Banco();
 
@@ -82,7 +82,7 @@ namespace ProjetoOnTheFlyBD
             {
                 Console.Write("Informe o Id do voo: ");
                 IdVoo = Console.ReadLine().ToUpper();
-                if (conn.VerificaDados(IdVoo, "IDVoo", "Voo"))
+                if (conn.VerificaDados(IdVoo, "ID", "Voo"))
                 {
                     Console.WriteLine("Voo encontrado com sucesso!");
                     Thread.Sleep(2000);
@@ -107,9 +107,9 @@ namespace ProjetoOnTheFlyBD
 
             DataCadastro = DateTime.Now;
 
-            Situacao = 'L';
+            Situacao = "L";
 
-            string query = $"INSERT INTO PassagemVoo(ID,IDVoo,DataUltimaOperação,Valor,Situacao) VALUES('{Id}','{idVoo}','{DataCadastro}','{Valor}','{Situacao}')";
+            string query = $"INSERT INTO PassagemVoo(ID,IDVoo,DataUltimaOperacao,Valor,Situacao) VALUES('{Id}','{idVoo}','{DataCadastro}','{Valor}','{Situacao}')";
             conn.Insert(query);
         }
 
@@ -118,155 +118,93 @@ namespace ProjetoOnTheFlyBD
             if (!BuscaIdVoo())
                 return;
 
-            Console.WriteLine(">>> Passagens Disponiveis <<<");
+            Console.Clear();
+            Console.WriteLine(">>> Passagens Cadastradas <<<");
 
             int opcao = 7;
-            string query = $"SELECT * FROM PassagemVoo WHERE IDVoo = '{IdVoo}' and Situacao  ='L'";
+            string query = $"SELECT ID,IDVoo,DataUltimaOperacao,Valor,Situacao FROM PassagemVoo WHERE IDVoo = '{IdVoo}' and Situacao  ='L'";
             conn.Select(query, opcao);
         }
 
-        //public void AlterarSituação()
-        //{
-        //    char situacao;
-        //    do
-        //    {
-        //        Console.WriteLine(" Alterar para Reservada ou Vendida uma passagem:\n L -  Livre \n P - Paga\n R - Reservada");
-        //        situacao = char.Parse(Console.ReadLine().ToUpper());
-        //        if ((situacao != 'V') && (situacao != 'R') && (situacao != 'L'))
-        //        {
-        //            Console.WriteLine(" Opção invalida!!!");
-        //        }
-        //    } while ((situacao != 'V') && (situacao != 'R') && (situacao != 'L'));
-        //}
+        public void AlteraDadoPassagem()
+        {
+            bool verificacao;
+            if (BuscaIdVoo())
+            {
+                Console.WriteLine(">>> ALTERAR DADOS DE PASSAGEM <<<");
+                
+                int opcao = 7;
 
-        //public void NevagarPassagem()
-        //{
-        //    string[] lines = File.ReadAllLines(Caminho);
-        //    List<string> passagem = new();
+                string query = $"SELECT ID,IDVoo,DataUltimaOperacao,Valor,Situacao FROM PassagemVoo WHERE IDVoo = '{IdVoo}' and Situacao  ='L'";
 
-        //    Console.WriteLine(" Digite o codigo do voo (V000): ");
-        //    string codVoo = Console.ReadLine();
+                verificacao = conn.Select(query, opcao);
 
-        //    for (int i = 0; i < lines.Length - 1; i++)
-        //    {
-        //        // Console.WriteLine(lines[i]);
-        //        //Console.ReadKey();
-        //        //Verifica passagens do voo
-        //        if (lines[i].Substring(7, 4).Contains(codVoo))
-        //            passagem.Add(lines[i]);
-        //    }
+                if (verificacao)
+                {
+                    string num;
+                    do
+                    {
+                        Console.Clear();
+                        Console.WriteLine(">>> ALTERAR DADOS DE PASSAGEM <<<");
+                        Console.Write("Para alterar digite:\n\n[1] Valor\n[2] Situação\n[0] Sair\nOpção: ");
+                        num = Console.ReadLine();
 
-        //    //Laço para navegar nos cadastros das Companhias
-        //    for (int i = 0; i < passagem.Count; i++)
-        //    {
-        //        string op;
-        //        do
-        //        {
-        //            Console.Clear();
-        //            Console.WriteLine(">>> Lista de Passagem <<<\nDigite para navegar:\n[1] Próximo Cadasatro\n[2] Cadastro Anterior" +
-        //                "\n[3] Último cadastro\n[4] Voltar ao Início\n[0] Sair\n");
+                        if (num != "1" && num != "2" && num != "3" && num != "0")
+                        {
+                            Console.WriteLine("Opção inválida!");
+                            Thread.Sleep(3000);
+                        }
 
-        //            Console.WriteLine($"Cadastro [{i + 1}] de [{passagem.Count}]");
-        //            //Imprimi o primeiro da lista 
-        //            LocalPassagem(Caminho, passagem[i].Substring(0, 5));
+                    } while (num != "1" && num != "2" && num != "3" && num != "0");
 
-        //            Console.Write("Opção: ");
-        //            op = Console.ReadLine();
+                    if (num.Contains("0"))
+                        return;
 
-        //            if (op != "0" && op != "1" && op != "2" && op != "3" && op != "4")
-        //            {
-        //                Console.WriteLine("Opção inválida!");
-        //                Thread.Sleep(2000);
-        //            }
-        //            //Sai do método
-        //            else if (op.Contains("0"))
-        //                return;
+                    switch (num)
+                    {
+                        case "1":
+                            Console.Write("Informe o novo preço: ");
+                            double valor = double.Parse(Console.ReadLine().Replace(",", "").Replace(".", ""));
 
-        //            //Volta no Cadastro Anterior
-        //            else if (op.Contains("2"))
-        //                if (i == 0)
-        //                    i = 0;
-        //                else
-        //                    i--;
+                            query = $"UPDATE PassagemVoo SET Valor = '{valor}' WHERE IDVoo = '{IdVoo}'";
+                            conn.Update(query);
 
-        //            //Vai para o fim da lista
-        //            else if (op.Contains("3"))
-        //                i = passagem.Count - 1;
+                            query = $"SELECT ID,IDVoo,DataUltimaOperacao,Valor,Situacao FROM PassagemVoo WHERE IDVoo = '{IdVoo}' and Situacao  ='L'";
+                            conn.Select(query, opcao);
+                            break;
 
-        //            //Volta para o inicio da lista
-        //            else if (op.Contains("4"))
-        //                i = 0;
-        //            //Vai para o próximo da lista    
-        //        } while (op != "1");
+                        case "2":
+                            if (!AlteraSituacao())
+                                return;
+                            query = $"UPDATE PassagemVoo SET Situacao = '{Situacao}' where IDVoo = '{IdVoo}'";
+                            conn.Update(query);
 
-        //    }
-        //}
-        //public void LocalPassagem(string caminho, string idPassagem)
-        //{
-        //    foreach (string linha in File.ReadLines(caminho))
-        //    {
-        //        if (linha.Contains(idPassagem))
-        //        {
-        //            Console.WriteLine($"Codigo Passagem: {linha.Substring(0, 6)}");
-        //            Console.WriteLine($"Codigo do Voo: {linha.Substring(6, 5)}");
-        //            Console.WriteLine($"Data Emissão da Passagem: {linha.Substring(11, 8)}");
-        //            Console.WriteLine($"Preço: R${linha.Substring(19, 4)},{linha.Substring(23, 2)}");
-        //            //Console.WriteLine($"Situação: {linha.Substring(26,1)}");
-        //            if (linha.Substring(25, 1).Contains('L'))
-        //            {
-        //                Console.WriteLine($" Situaçã: Livre");
-        //            }
-        //            else if (linha.Substring(25, 1).Contains('P'))
-        //            {
-        //                Console.WriteLine($" Situação: Paga");
-        //            }
-        //            else if (linha.Substring(25, 1).Contains('R'))
-        //            {
-        //                Console.WriteLine($" Situação: Reservada");
-        //            }
-        //        }
-        //        break;
-        //    }
-        //}
+                            query = $"SELECT ID,IDVoo,DataUltimaOperacao,Valor,Situacao FROM PassagemVoo WHERE IDVoo = '{IdVoo}' and Situacao  ='L'";
+                            conn.Select(query, opcao);
+                            break;
+                    }
+                    Console.WriteLine("Cadastro alterado com sucesso!");
+                    Thread.Sleep(3000);
+                }
+            }
+        }
 
-
-
-        //public void AlterarPrecoPassagem()
-        //{
-
-        //    string[] lines = File.ReadAllLines(Caminho);
-
-        //    Console.WriteLine($" Digite o novo valor da passagem: ");
-        //    float novoValor = float.Parse(Console.ReadLine().Replace(",", ""));
-
-        //    Console.WriteLine(" Digite o codigo do voo (V000): ");
-        //    bool retorna = true;
-        //    do
-        //    {
-        //        string codVoo = Console.ReadLine();
-
-
-        //        for (int i = 0; i < lines.Length; i++)
-        //        {
-
-        //            if (lines[i].Substring(7, 4).Contains(codVoo))
-        //            {
-        //                if (lines[i].Substring(25, 1).Contains('L'))
-        //                {
-        //                    lines[i] = lines[i].Replace(lines[i].Substring(19, 6), novoValor.ToString("000000"));
-        //                    retorna = false;
-        //                }
-        //            }
-        //            else
-        //            {
-        //                Console.WriteLine(" Codigo de Voo não encontrado!");
-        //            }
-        //        }
-        //    } while (retorna);
-        //    File.WriteAllLines(Caminho, lines);
-
-        //}
-
+        public bool AlteraSituacao()
+        {
+            string num;
+            do
+            {
+                Console.WriteLine("Alterar Situação:\n[L] Livre \n[P] Paga\n[R] Reservada");
+                num = Console.ReadLine().ToUpper();
+                if ((num != "V") && (num != "R") && (num != "L"))
+                {
+                    Console.WriteLine("Digite um opção válida!!!");
+                    Thread.Sleep(2000);
+                }
+            } while ((num != "V") && (num != "R") && (num != "L"));
+            Situacao = num;
+            return true;
+        }
     }
 }
 

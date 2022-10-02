@@ -159,7 +159,7 @@ namespace ProjetoOnTheFlyBD
                                 Console.WriteLine("ID Passagem: {0}", leitor.GetString(0));
                                 Console.WriteLine("ID Voo: {0}", leitor.GetString(1));
                                 Console.WriteLine("Data Ultima Operação: {0}", leitor.GetDateTime(2).ToShortDateString());
-                                Console.WriteLine("Valor: {0}", leitor.GetFloat(3));
+                                Console.WriteLine("Valor: {0}", leitor.GetDouble(3));
                                 Console.WriteLine("Situação: {0}", leitor.GetString(4));
                                 retorna = true;
                             }
