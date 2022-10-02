@@ -54,6 +54,50 @@ namespace ProjetoOnTheFlyBD
             }
         }
 
+        public bool VerificaIdPassagem()
+        {
+            do
+            {
+                Console.Write("Informe o Id da passagem: ");
+                Id = Console.ReadLine().ToUpper();
+                if (conn.VerificaDados(Id, "ID", "PassagemVoo"))
+                {
+                    Console.WriteLine("Passagem encontrada com sucesso!");
+                    Thread.Sleep(2000);
+                    return true;
+                }
+                else
+                {
+                    Console.WriteLine("Passagem não encontrada!");
+                    Id = "";
+                    Thread.Sleep(2000);
+                }
+            } while (Id.Length == 0);
+            return false;
+        }
+
+        public bool BuscaIdVoo()
+        {
+            do
+            {
+                Console.Write("Informe o Id do voo: ");
+                IdVoo = Console.ReadLine().ToUpper();
+                if (conn.VerificaDados(IdVoo, "IDVoo", "Voo"))
+                {
+                    Console.WriteLine("Voo encontrado com sucesso!");
+                    Thread.Sleep(2000);
+                    return true;
+                }
+                else
+                {
+                    Console.WriteLine("Voo não encontrado!");
+                    IdVoo = "";
+                    Thread.Sleep(2000);
+                }
+            } while (IdVoo.Length == 0);
+            return false;
+        }
+
         public void GerarPassagem(string idVoo, float valorPas)
         {
             if (!GerarIdPassagem())
@@ -69,6 +113,17 @@ namespace ProjetoOnTheFlyBD
             conn.Insert(query);
         }
 
+        public void imprimePassagem()
+        {
+            if (!BuscaIdVoo())
+                return;
+
+            Console.WriteLine(">>> Passagens Disponiveis <<<");
+
+            int opcao = 7;
+            string query = $"SELECT * FROM PassagemVoo WHERE IDVoo = '{IdVoo}' and Situacao  ='L'";
+            conn.Select(query, opcao);
+        }
 
         //public void AlterarSituação()
         //{

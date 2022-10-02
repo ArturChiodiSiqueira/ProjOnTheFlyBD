@@ -84,4 +84,4 @@ select * from CompanhiaAerea;
 select * from Aeronave;
 select * from Voo;
 select * from Aeroporto;
-select * from PassagemVoo
+select * from PassagemVoo;

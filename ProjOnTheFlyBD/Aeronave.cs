@@ -41,7 +41,7 @@ namespace ProjetoOnTheFlyBD
                 }
                 else
                 {
-                    Console.WriteLine("CNPJ NÃO ENCONTRADO");
+                    Console.WriteLine("CNPJ NÃO ENCONTRADO!");
                     Cnpj = "";
                 }
             } while (Cnpj.Length == 0);
@@ -75,19 +75,6 @@ namespace ProjetoOnTheFlyBD
             Console.ReadKey();
 
             Console.ReadKey();
-        }
-
-
-        public bool VerificaAeronave(string caminho, string inscricao)
-        {
-            foreach (string line in File.ReadLines(caminho))
-            {
-                if (line.Substring(0, 5).Contains(inscricao))
-                {
-                    return true;
-                }
-            }
-            return false;
         }
 
         public bool CadastraIdAeronave()
@@ -223,81 +210,6 @@ namespace ProjetoOnTheFlyBD
             conn.Select(query, opcao);
         }
 
-        //public void AlteraDadoAeronave()
-        //{
-        //    string inscricao;
-        //    string caminho = Caminho;
-        //    Console.WriteLine(">>> ALTERAR DADOS DE AERONAVE <<<\nPara sair digite 's'.\n");
-        //    Console.Write("Digite a inscrição da aeronave: ");
-        //    inscricao = Console.ReadLine().ToUpper().Trim().Replace("-", "");
-        //    if (inscricao == "s")
-        //        return;
-        //    if (!VerificaAeronave(Caminho, inscricao))
-        //    {
-        //        Console.WriteLine("Aeronave não encontrada!!");
-        //        Thread.Sleep(3000);
-        //        return;
-        //    }
-        //    string[] lines = File.ReadAllLines(Caminho);
-        //    for (int i = 0; i < lines.Length; i++)
-        //    {
-        //        if (lines[i].Contains(inscricao))
-        //        {
-        //            string num;
-        //            do
-        //            {
-        //                Console.Clear();
-        //                Console.WriteLine(">>> ALTERAR DADOS DE AERONAVE <<<");
-        //                Console.Write("Para alterar digite:\n\n[1] Capacidade\n[2] Situação do Cadastro\n[0] Sair\nOpção: ");
-        //                num = Console.ReadLine();
-        //                if (num != "1" && num != "2" && num != "0")
-        //                {
-        //                    Console.WriteLine("Opção inválida!");
-        //                    Thread.Sleep(3000);
-        //                }
-        //            } while (num != "1" && num != "2" && num != "0");
-        //            if (num.Contains("0"))
-        //                return;
-        //            switch (num)
-        //            {
-        //                case "1":
-        //                    if (!CadastraQtdPassageiros())
-        //                        return;
-        //                    lines[i] = lines[i].Replace(lines[i].Substring(5, Capacidade.Length), Capacidade);
-        //                    break;
-        //                case "2":
-        //                    if (!AlteraSituacao())
-        //                        return;
-        //                    lines[i] = lines[i].Replace(lines[i].Substring(27, Situacao.Length), Situacao);
-        //                    break;
-        //            }
-        //            Console.WriteLine("Cadastro alterado com sucesso!");
-        //            Thread.Sleep(3000);
-        //        }
-        //    }
-        //    File.WriteAllLines(Caminho, lines);
-        //}
-
-        //public void ImprimeAeronave(string caminho, string inscricao)
-        //{
-        //    foreach (string line in File.ReadLines(caminho))
-        //    {
-        //        if (line.Contains(inscricao))
-        //        {
-        //            Console.WriteLine($"\nInscrição: {line.Substring(0, 2)}-{line.Substring(2, 3)}");
-        //            Console.WriteLine($"Capacidade: {line.Substring(5, 3)}");
-        //            Console.WriteLine($"Assentos ocupados: {line.Substring(8, 3)}");
-        //            Console.WriteLine($"Ultima venda: {line.Substring(11, 2)}/{line.Substring(13, 2)}/{line.Substring(15, 4)}");
-        //            Console.WriteLine($"Data do Cadastro: {line.Substring(19, 2)}/{line.Substring(21, 2)}/{line.Substring(23, 4)}");
-
-        //            if (line.Substring(27, 1).Contains("A"))
-        //                Console.WriteLine($"Situação: Ativo");
-        //            else
-        //                Console.WriteLine($"Situação: Inativo");
-        //        }
-        //    }
-        //}
-
         //public void ImprimeAeronaves()
         //{
         //    string[] lines = File.ReadAllLines(Caminho);
@@ -346,8 +258,5 @@ namespace ProjetoOnTheFlyBD
         //        } while (op != "1");
         //    }
         //}
-
-
-
     }
 }

@@ -382,7 +382,7 @@ namespace ProjOnTheFlyBD
                     case 5:
                         Console.WriteLine("Imprime passagem");
                         Console.Clear();
-                        //passagemVoo.NevagarPassagem();
+                        passagemVoo.imprimePassagem();
                         break;
 
                     case 6:

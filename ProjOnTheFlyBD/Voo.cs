@@ -112,7 +112,7 @@ namespace ProjetoOnTheFlyBD
             conn.Insert(query);
 
             Console.WriteLine("\nCADASTRO REALIZADO COM SUCESSO!\n");
-            //Console.ReadKey();
+            Thread.Sleep(2000);
 
             int capacidade = 0;
             capacidade = conn.GetCapacidade(IdAeronave);
