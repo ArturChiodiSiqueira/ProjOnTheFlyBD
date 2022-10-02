@@ -7,8 +7,6 @@ namespace ProjOnTheFlyBD
     {
         static void Main(string[] args)
         {
-            Console.WriteLine("Hello World!");
-
             MostrarMenuInicial();
         }
 
