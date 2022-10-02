@@ -6,7 +6,7 @@ using System.Text;
 using System.Threading;
 using System.Threading.Tasks;
 
-namespace ProjetoOnTheFlyBD
+namespace ProjOnTheFlyBD
 {
     internal class Voo
     {
@@ -192,7 +192,7 @@ namespace ProjetoOnTheFlyBD
 
             int opcao = 6;
 
-            string query = $"SELECT ID,Inscricao,Destino,DataVoo,DataCadastro,Situacao FROM Voo WHERE ID = '{id}'";
+            string query = $"SELECT ID,Inscricao,Destino,DataVoo,DataCadastro,AssentosOcupados,Situacao FROM Voo WHERE ID = '{id}'";
 
             verificacao = conn.Select(query, opcao);
 
@@ -225,7 +225,7 @@ namespace ProjetoOnTheFlyBD
                         query = $"UPDATE Voo SET Destino = '{Destino}' where ID = '{id}'";
                         conn.Update(query);
 
-                        query = $"SELECT ID,Inscricao,Destino,DataVoo,DataCadastro,Situacao FROM Voo WHERE ID = '{id}'";
+                        query = $"SELECT ID,Inscricao,Destino,DataVoo,DataCadastro,AssentosOcupados,Situacao FROM Voo WHERE ID = '{id}'";
                         conn.Select(query, opcao);
                         break;
 
@@ -235,7 +235,7 @@ namespace ProjetoOnTheFlyBD
                         query = $"UPDATE Voo SET Inscricao = '{IdAeronave}' where ID = '{id}'";
                         conn.Update(query);
 
-                        query = $"SELECT ID,Inscricao,Destino,DataVoo,DataCadastro,Situacao FROM Voo WHERE ID = '{id}'";
+                        query = $"SELECT ID,Inscricao,Destino,DataVoo,DataCadastro,AssentosOcupados,Situacao FROM Voo WHERE ID = '{id}'";
                         conn.Select(query, opcao);
                         break;
 
@@ -245,7 +245,7 @@ namespace ProjetoOnTheFlyBD
                         query = $"UPDATE Voo SET Situacao = '{Situacao}' where ID = '{id}'";
                         conn.Update(query);
 
-                        query = $"SELECT ID,Inscricao,Destino,DataVoo,DataCadastro,Situacao FROM Voo WHERE ID = '{id}'";
+                        query = $"SELECT ID,Inscricao,Destino,DataVoo,DataCadastro,AssentosOcupados,Situacao FROM Voo WHERE ID = '{id}'";
                         conn.Select(query, opcao);
                         break;
                 }

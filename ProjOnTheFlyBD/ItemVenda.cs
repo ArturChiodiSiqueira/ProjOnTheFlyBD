@@ -6,22 +6,21 @@ using System.Text;
 using System.Threading;
 using System.Threading.Tasks;
 
-namespace ProjetoOnTheFlyBD
+namespace ProjOnTheFlyBD
 {
     internal class ItemVenda
     {
-        public string Id { get; set; }
+        public int Id { get; set; }
         public string IdPassagem { get; set; }
-        public string ValorUnitario { get; set; }
-        //public int PassagensCompradas { get; set; }
-        string caminho = $"C:\\Users\\artur\\source\\repos\\ProjetoOnTheFly\\ProjetoOnTheFly\\Dados\\ItemVenda.dat";
-        string caminhoVoo = $"C:\\Users\\artur\\source\\repos\\ProjetoOnTheFly\\ProjetoOnTheFly\\Dados\\Voo.dat";
-        string caminhoVenda = $"C:\\Users\\artur\\source\\repos\\ProjetoOnTheFly\\ProjetoOnTheFly\\Dados\\Venda.dat";
-        string caminhoPassagemVoo = $"C:\\Users\\artur\\source\\repos\\ProjetoOnTheFly\\ProjetoOnTheFly\\Dados\\PassagemVoo.dat";
-        public ItemVenda(int idVenda)
+        public double ValorUnitario { get; set; }
+        public int IdVenda { get; set; }
+
+        Banco conn = new Banco();
+
+        public ItemVenda()
         {
-            this.Id = idVenda.ToString("00000");
         }
+
         public string CadastrarItemVenda()
         {
             string pass;
@@ -31,13 +30,16 @@ namespace ProjetoOnTheFlyBD
             {
                 cont++;
                 Console.Clear();
+
                 pass = ListarPassagens();
+
                 if (pass != "0")
                     IdPassagem = pass.Substring(0, 5);
+
                 ValorUnitario = pass.Substring(5, 6);
+
                 valortotal += float.Parse(ValorUnitario);
-                string texto = $"{cont}{ToString()}\n";
-                File.AppendAllText(caminho, texto);
+
                 Console.WriteLine("Compra realizada com sucesso!");
                 Console.WriteLine("Voce comprou " + cont + " Passagens");
                 //valortotal = valortotal + float.Parse(ValorUnitario);

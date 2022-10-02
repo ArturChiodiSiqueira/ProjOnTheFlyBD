@@ -8,7 +8,7 @@ using System.Text;
 using System.Threading;
 using System.Threading.Tasks;
 
-namespace ProjetoOnTheFlyBD
+namespace ProjOnTheFlyBD
 {
     internal class Passageiro
     {

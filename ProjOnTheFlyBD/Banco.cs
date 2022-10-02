@@ -6,7 +6,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace ProjetoOnTheFlyBD
+namespace ProjOnTheFlyBD
 {
     internal class Banco
     {
@@ -144,7 +144,8 @@ namespace ProjetoOnTheFlyBD
                                 Console.WriteLine("Destino (iata): {0}", leitor.GetString(2));
                                 Console.WriteLine("Data Voo: {0}", leitor.GetString(3));
                                 Console.WriteLine("Data Cadastro: {0}", leitor.GetDateTime(4).ToShortDateString());
-                                Console.WriteLine("Situação: {0}", leitor.GetString(5));
+                                Console.WriteLine("Assentos Ocupados: {0}", leitor.GetInt32(5));
+                                Console.WriteLine("Situação: {0}", leitor.GetString(6));
                                 retorna = true;
                             }
                         }

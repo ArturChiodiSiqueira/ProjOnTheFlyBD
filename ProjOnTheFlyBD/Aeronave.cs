@@ -6,7 +6,7 @@ using System.Text;
 using System.Threading;
 using System.Threading.Tasks;
 
-namespace ProjetoOnTheFlyBD
+namespace ProjOnTheFlyBD
 {
     internal class Aeronave
     {
@@ -71,7 +71,7 @@ namespace ProjetoOnTheFlyBD
 
             conn.Insert(query);
 
-            Console.WriteLine("\n CADASTRO REALIZADO COM SUCESSO!\nPressione Enter para continuar...");
+            Console.WriteLine("\nCADASTRO REALIZADO COM SUCESSO!\nPressione Enter para continuar...");
             Console.ReadKey();
 
             Console.ReadKey();
