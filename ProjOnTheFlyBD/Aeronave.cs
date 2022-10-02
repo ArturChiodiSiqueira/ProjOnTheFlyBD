@@ -33,7 +33,7 @@ namespace ProjetoOnTheFlyBD
         {
             do
             {
-                Console.Write("Informe o CNPJ da qual a aeronave pertence:");
+                Console.Write("Informe o CNPJ da qual a aeronave pertence: ");
                 Cnpj = Console.ReadLine().Replace(".", "").Replace("-", "").Replace("/", "");
                 if (conn.VerificaDados(Cnpj, "Cnpj", "CompanhiaAerea"))
                 {
@@ -94,36 +94,36 @@ namespace ProjetoOnTheFlyBD
         {
             do
             {
-                Console.Write("Informe o código de identificação da aeronave seguindo o padrão definido pela ANAC (XX-XXX):");
+                Console.Write("Informe o código de identificação da aeronave seguindo o padrão definido pela ANAC (XX-XXX): ");
                 Inscricao = Console.ReadLine().ToUpper().Trim().Replace("-", "");
             } while (Inscricao.Length != 5);
-
-            //if (VerificaAeronave(Caminho, Inscricao))
-            //{
-            //    Console.WriteLine("Esta Aeronave já está cadastrada!!");
-            //    Thread.Sleep(3000);
-            //    return false;
-            //}
+            
             return true;
         }
 
         public bool CadastraQtdPassageiros()
         {
+            int capacidade;
             do
             {
                 Console.Write("Informe a capacidade de pessoas que a aeronave comporta: ");
-                Capacidade = Console.ReadLine();
-            } while (int.Parse(Capacidade) < 0 || int.Parse(Capacidade) > 999);
 
-            if (int.Parse(Capacidade) > 9 && int.Parse(Capacidade) < 100)
-            {
-                Capacidade = "0" + Capacidade;
-            }
+                while (!int.TryParse(Console.ReadLine(), out capacidade))
+                {
+                    Console.WriteLine("Formato incorreto!");
+                    break;
+                }
 
-            if (int.Parse(Capacidade) < 10)
-            {
-                Capacidade = "00" + Capacidade;
-            }
+                if (capacidade == 0)
+                    return false;
+                if (capacidade < 0 || capacidade > 999)
+                {
+                    Console.WriteLine("Capacidade inválida!");
+                    Thread.Sleep(2000);
+                }
+            } while (capacidade < 0 || capacidade > 999);
+
+            Capacidade = capacidade.ToString();
             return true;
         }
 

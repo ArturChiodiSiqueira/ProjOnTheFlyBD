@@ -16,6 +16,7 @@ namespace ProjetoOnTheFlyBD
         public string DataVoo { get; set; }
         public DateTime DataCadastro { get; set; }
         public string Situacao { get; set; }
+        public int AssentosOcupados { get; set; }
 
         Banco conn = new Banco();
 
@@ -56,7 +57,7 @@ namespace ProjetoOnTheFlyBD
             do
             {
                 Console.Write("Informe a inscrição da aeronave que irá realizar o voo: ");
-                IdAeronave = Console.ReadLine();
+                IdAeronave = Console.ReadLine().ToUpper();
 
                 if (conn.VerificaDados(IdAeronave, "Inscricao", "Aeronave"))
                 {
@@ -105,14 +106,34 @@ namespace ProjetoOnTheFlyBD
 
             Situacao = "A";
 
-            PassagemVoo passagemVoo = new();
-            passagemVoo.GerarPassagem(IdAeronave, Id);
+            AssentosOcupados = 0;
 
-            string query = $"INSERT INTO Voo(ID, Inscricao, Destino, DataVoo, DataCadastro, Situacao) VALUES('{Id}','{IdAeronave}','{Destino}','{DataVoo}','{DataCadastro}','{Situacao}');";
+            string query = $"INSERT INTO Voo(ID, Inscricao, Destino, DataVoo, DataCadastro, AssentosOcupados, Situacao) VALUES('{Id}','{IdAeronave}','{Destino}','{DataVoo}','{DataCadastro}','{AssentosOcupados}','{Situacao}');";
             conn.Insert(query);
 
-            Console.WriteLine("\n CADASTRO REALIZADO COM SUCESSO!\nPressione Enter para continuar...");
-            Console.ReadKey();
+            Console.WriteLine("\nCADASTRO REALIZADO COM SUCESSO!\n");
+            //Console.ReadKey();
+
+            int capacidade = 0;
+            capacidade = conn.GetCapacidade(IdAeronave);
+
+            float valorPas;
+            string valor;
+            do
+            {
+                Console.Write("Digite o valor da Passagem: ");
+                valor = Console.ReadLine().Replace(".", "").Replace(",", "");
+                if (!float.TryParse(valor, out valorPas))
+                    Console.WriteLine("Valor inválido!");
+            } while (!float.TryParse(valor, out valorPas));
+
+            for (int passagens = 1; passagens <= capacidade; passagens++)
+            {
+                PassagemVoo passagem = new();
+                passagem.GerarPassagem(Id, valorPas);
+            }
+            Console.WriteLine("Passagens geradas com sucesso!");
+            Thread.Sleep(2000);
 
             Console.ReadKey();
         }

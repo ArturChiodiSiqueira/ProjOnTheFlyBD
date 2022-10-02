@@ -111,7 +111,7 @@ namespace ProjetoOnTheFlyBD
                                 Console.WriteLine("\nRegistro Encontrado:\n");
                                 Console.WriteLine("Inscrição: {0}", leitor.GetString(0));
                                 Console.WriteLine("Cnpj: {0}", leitor.GetString(1));
-                                Console.WriteLine("Capacidade: {0}", leitor.GetString(2));
+                                Console.WriteLine("Capacidade: {0}", leitor.GetInt32(2));
                                 Console.WriteLine("Assentos Ocupados: {0}", leitor.GetString(3));
                                 Console.WriteLine("Ultima Venda: {0}", leitor.GetDateTime(4).ToShortDateString());
                                 Console.WriteLine("Data Cadastro: {0}", leitor.GetDateTime(5).ToShortDateString());
@@ -241,6 +241,38 @@ namespace ProjetoOnTheFlyBD
                 Conexaosql.Close();
                 Console.ReadKey();
                 return false;
+            }
+        }
+
+        public int GetCapacidade(string inscricao)
+        {
+
+            string query = $"SELECT Inscricao, Cnpj,Capacidade, UltimaVenda, DataCadastro, Situacao FROM Aeronave WHERE Inscricao = '{inscricao}';";
+
+            int capacidade = 0;
+
+            try
+            {
+                SqlCommand command = new SqlCommand(query, Conexaosql);
+
+                Conexaosql.Open();
+
+                using (SqlDataReader leitor = command.ExecuteReader())
+                {
+                    while (leitor.Read())
+                    {
+                        capacidade = leitor.GetInt32(2);
+                    }
+                }
+                Conexaosql.Close();
+                return capacidade;
+            }
+            catch (Exception e)
+            {
+                Conexaosql.Close();
+                Console.WriteLine("Erro ao comunicar com o banco\n" + e.Message + "\nTecle [ENTER] para continuar.");
+                Console.ReadKey();
+                return 0;
             }
         }
     }

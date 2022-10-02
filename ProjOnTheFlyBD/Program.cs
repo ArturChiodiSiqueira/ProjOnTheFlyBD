@@ -300,7 +300,7 @@ namespace ProjOnTheFlyBD
                     case 5:
                         Console.WriteLine("Editar passagem");
                         Console.Clear();
-                        passagemVoo.AlterarPrecoPassagem();
+                        //passagemVoo.AlterarPrecoPassagem();
                         break;
 
                     case 6:
@@ -382,7 +382,7 @@ namespace ProjOnTheFlyBD
                     case 5:
                         Console.WriteLine("Imprime passagem");
                         Console.Clear();
-                        passagemVoo.NevagarPassagem();
+                        //passagemVoo.NevagarPassagem();
                         break;
 
                     case 6:
