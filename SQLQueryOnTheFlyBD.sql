@@ -47,7 +47,7 @@ Situacao char(1) not null
 create table PassagemVoo (
 ID varchar(6) not null primary key,
 IDVoo varchar(5) foreign key references Voo(ID) not null,
-DataUltimaOperação Date not null,
+DataUltimaOperacao Date not null,
 Valor float not null,
 Situacao char(1) not null
 );
