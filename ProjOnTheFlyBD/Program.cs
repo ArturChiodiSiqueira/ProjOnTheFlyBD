@@ -130,7 +130,7 @@ namespace ProjOnTheFlyBD
                     case 5:
                         Console.WriteLine(" Cadastrar venda de passagem");
                         Console.Clear();
-                        venda.Cadastrar();
+                        venda.CadastrarVenda();
                         MostrarMenuInicial();
                         break;
                     case 6:
@@ -305,7 +305,7 @@ namespace ProjOnTheFlyBD
                     case 6:
                         Console.WriteLine("Imprime venda de passagem");
                         Console.Clear();
-                        venda.Imprimir();
+                        venda.ImprimeVenda();
                         MostrarMenuInicial();
                         break;
 

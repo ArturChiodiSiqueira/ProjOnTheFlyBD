@@ -26,6 +26,18 @@ namespace ProjOnTheFlyBD
             return $"{Id}{IdPassagem}{ValorUnitario}{IdVenda}";
         }
 
+        public void GeraId()
+        {
+            for (int i = 1; i <= 999; i++)
+            {
+                if (!conn.VerificaDados(i.ToString(), "ID", "ItemVenda"))
+                {
+                    Id = i;
+                    break;
+                }
+            }
+        }
+
         public void CadastraItemVenda(int idVenda, string idPassagem)
         {
             ValorUnitario = conn.GetValor(idPassagem);
@@ -34,40 +46,27 @@ namespace ProjOnTheFlyBD
 
             string query = $"INSERT INTO ItemVenda (IDVenda, IDPassagem, ValorUnitario) VALUES ('{IdVenda}', '{IdPassagem}', '{ValorUnitario}');";
             conn.Insert(query);
-
-            ComprarItemVenda();
         }
 
-        public string ComprarItemVenda()
+        public void AlteraPassagem(int id, string passagemVoo)
         {
-            int cont = 0;
-            double valortotal = 0.0;
-            valortotal += ValorUnitario;
+            Console.WriteLine(">>> ALTERANDO VOO <<<");
+            string query = $"UPDATE ItemVenda SET IDPassagem = '{passagemVoo}' WHERE ID = {id}";
+            conn.Update(query);
 
-            do
-            {
-                cont++;
-                Console.Clear();
+            Console.WriteLine(">>> ALTERANDO VALOR <<<");
+            ValorUnitario = conn.GetValor(passagemVoo);
+            string queryy = $"UPDATE ItemVenda SET ValorUnitario = '{ValorUnitario}' WHERE IDPassagem = {passagemVoo}";
+            conn.Update(queryy);
+        }
 
-                Console.WriteLine("Compra realizada com sucesso!");
-                Console.WriteLine("Voce comprou " + cont + " Passagens");
+        public void ImprimiItemVenda(int id)
+        {
+            int opcao = 8;
+            Console.WriteLine(">>> Itens Cadastrados <<<");
 
-                Console.WriteLine("Deseja comprar novamente (s/n)?");
-                string op = Console.ReadLine().ToLower();
-
-                if (op != "s" && op != "n")
-                    Console.WriteLine("Insira uma resposta valida! (s/n)");
-
-                if (op == "n")
-                    break;
-
-            } while (cont < 4);
-            if (cont == 4)
-            {
-                Console.WriteLine("Limite de passagens atingindo!\nPressione enter para continuar");
-                Console.ReadKey();
-            }
-            return valortotal.ToString("0000000");
+            string query = "SELECT * FROM ItemVenda";
+            conn.Select(query, opcao);
         }
     }
 }

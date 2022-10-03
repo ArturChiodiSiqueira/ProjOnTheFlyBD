@@ -221,7 +221,6 @@ namespace ProjOnTheFlyBD
                         CNPJOk[nrDig] = (
                         digitos[12 + nrDig] == (
                         11 - resultado[nrDig]));
-
                 }
                 return (CNPJOk[0] && CNPJOk[1]);
             }

@@ -59,7 +59,7 @@ namespace ProjOnTheFlyBD
                     case 1:
                         using (SqlDataReader leitor = cmd.ExecuteReader())
                         {
-                            while (leitor.Read()) //enquanto leitor for verdadeiro
+                            while (leitor.Read())
                             {
                                 Console.WriteLine("\nRegistro Encontrado:\n");
                                 Console.WriteLine("CPF: {0}", leitor.GetString(0));
@@ -89,7 +89,7 @@ namespace ProjOnTheFlyBD
                     case 3:
                         using (SqlDataReader leitor = cmd.ExecuteReader())
                         {
-                            while (leitor.Read()) //enquanto leitor for verdadeiro
+                            while (leitor.Read())
                             {
                                 Console.WriteLine("\nRegistro Encontrado:\n");
                                 Console.WriteLine("CNPJ: {0}", leitor.GetString(0));
@@ -106,7 +106,7 @@ namespace ProjOnTheFlyBD
                     case 4:
                         using (SqlDataReader leitor = cmd.ExecuteReader())
                         {
-                            while (leitor.Read()) //enquanto leitor for verdadeiro
+                            while (leitor.Read())
                             {
                                 Console.WriteLine("\nRegistro Encontrado:\n");
                                 Console.WriteLine("Inscrição: {0}", leitor.GetString(0));
@@ -136,7 +136,7 @@ namespace ProjOnTheFlyBD
                     case 6:
                         using (SqlDataReader leitor = cmd.ExecuteReader())
                         {
-                            while (leitor.Read()) //enquanto leitor for verdadeiro
+                            while (leitor.Read())
                             {
                                 Console.WriteLine("\nRegistro Encontrado:\n");
                                 Console.WriteLine("ID Voo: {0}", leitor.GetString(0));
@@ -154,7 +154,7 @@ namespace ProjOnTheFlyBD
                     case 7:
                         using (SqlDataReader leitor = cmd.ExecuteReader())
                         {
-                            while (leitor.Read()) //enquanto leitor for verdadeiro
+                            while (leitor.Read())
                             {
                                 Console.WriteLine("\nRegistro Encontrado:\n");
                                 Console.WriteLine("ID Passagem: {0}", leitor.GetString(0));
@@ -162,6 +162,36 @@ namespace ProjOnTheFlyBD
                                 Console.WriteLine("Data Ultima Operação: {0}", leitor.GetDateTime(2).ToShortDateString());
                                 Console.WriteLine("Valor: {0}", leitor.GetDouble(3));
                                 Console.WriteLine("Situação: {0}", leitor.GetString(4));
+                                retorna = true;
+                            }
+                        }
+                        break;
+
+                    case 8:
+                        using (SqlDataReader leitor = cmd.ExecuteReader())
+                        {
+                            while (leitor.Read())
+                            {
+                                Console.WriteLine("\nRegistro Encontrado:\n");
+                                Console.WriteLine("ID: {0}", leitor.GetInt32(0));
+                                Console.WriteLine("ID Venda: {0}", leitor.GetInt32(1));
+                                Console.WriteLine("ID Passagem: {0}", leitor.GetString(2));
+                                Console.WriteLine("Valor Unitario: {0}", leitor.GetDouble(3));
+                                retorna = true;
+                            }
+                        }
+                        break;
+
+                    case 9:
+                        using (SqlDataReader leitor = cmd.ExecuteReader())
+                        {
+                            while (leitor.Read())
+                            {
+                                Console.WriteLine("\nRegistro Encontrado:\n");
+                                Console.WriteLine("ID: {0}", leitor.GetInt32(0));
+                                Console.WriteLine("CPF Vinculado: {0}", leitor.GetString(1));
+                                Console.WriteLine("Data Venda: {0}", leitor.GetDateTime(2).ToShortDateString());
+                                Console.WriteLine("Total Vendas: {0}", leitor.GetDouble(3));
                                 retorna = true;
                             }
                         }
@@ -238,9 +268,9 @@ namespace ProjOnTheFlyBD
             {
                 SqlCommand command = new SqlCommand(queryString, Conexaosql);
                 Conexaosql.Open();
-                using (SqlDataReader reader = command.ExecuteReader())
+                using (SqlDataReader leitor = command.ExecuteReader())
                 {
-                    if (reader.Read())
+                    if (leitor.Read())
                     {
                         Conexaosql.Close();
                         return true;
@@ -293,11 +323,11 @@ namespace ProjOnTheFlyBD
             }
         }
 
-        public double GetValor(string IdPassagemVoo)
+        public string GetVoo(string idPassagem)
         {
-            string queryString = $"SELECT ID, IDVoo, DataUltimaOperacao, Valor, Situacao FROM PassagemVoo WHERE ID = '{IdPassagemVoo}';";
+            string queryString = $"SELECT Inscricao FROM Voo WHERE ID = '{idPassagem}';";
 
-            double valor = 0;
+            string valor = "";
 
             try
             {
@@ -305,11 +335,130 @@ namespace ProjOnTheFlyBD
 
                 Conexaosql.Open();
 
-                using (SqlDataReader reader = command.ExecuteReader())
+                using (SqlDataReader leitor = command.ExecuteReader())
                 {
-                    while (reader.Read())
+                    while (leitor.Read())
                     {
-                        valor = reader.GetDouble(2);
+                        valor = leitor.GetString(0);
+                    }
+                }
+                Conexaosql.Close();
+                return valor;
+            }
+            catch (Exception e)
+            {
+                Conexaosql.Close();
+                Console.WriteLine("Erro ao comunicar com o banco\n" + e.Message + "\nTecle [ENTER] para continuar.");
+                Console.WriteLine("Tecle Enter para continuar....");
+                Console.ReadKey();
+                return "";
+            }
+        }
+
+        public double GetValor(string IdPassagemVoo)
+        {
+            string query = $"SELECT ID, IDVoo, DataUltimaOperacao, Valor, Situacao FROM PassagemVoo WHERE ID = '{IdPassagemVoo}';";
+
+            double valor = 0;
+
+            try
+            {
+                SqlCommand command = new SqlCommand(query, Conexaosql);
+
+                Conexaosql.Open();
+
+                using (SqlDataReader leitor = command.ExecuteReader())
+                {
+                    while (leitor.Read())
+                    {
+                        valor = leitor.GetDouble(2);
+                    }
+                }
+                Conexaosql.Close();
+                return valor;
+            }
+            catch (Exception e)
+            {
+                Conexaosql.Close();
+                Console.WriteLine("Erro ao comunicar com o banco\n" + e.Message + "\nTecle [ENTER] para continuar.");
+                Console.ReadKey();
+                return 0;
+            }
+        }
+
+        public string GetIdAeronave(string idPassagem)
+        {
+            string query = $"SELECT IDVoo FROM PassagemVoo WHERE ID = '{idPassagem}';";
+
+            string voo = "";
+            string aeronave = "";
+            try
+            {
+                SqlCommand command = new SqlCommand(query, Conexaosql);
+
+                Conexaosql.Open();
+
+                using (SqlDataReader leitor = command.ExecuteReader())
+                {
+                    while (leitor.Read())
+                    {
+                        voo = leitor.GetString(0);
+                    }
+                }
+                Conexaosql.Close();
+            }
+            catch (Exception e)
+            {
+                Conexaosql.Close();
+                Console.WriteLine("Erro ao comunicar com o banco\n" + e.Message + "\nTecle [ENTER] para continuar.");
+                Console.ReadKey();
+                return "";
+            }
+
+            string queryy = $"SELECT Inscricao FROM Voo WHERE ID = '{voo}';";
+
+            try
+            {
+                SqlCommand command = new SqlCommand(queryy, Conexaosql);
+
+                Conexaosql.Open();
+
+                using (SqlDataReader leitor = command.ExecuteReader())
+                {
+                    while (leitor.Read())
+                    {
+                        aeronave = leitor.GetString(0);
+                    }
+                }
+                Conexaosql.Close();
+                return aeronave;
+            }
+            catch (Exception e)
+            {
+                Conexaosql.Close();
+                Console.WriteLine("Erro ao comunicar com o banco\n" + e.Message + "\nTecle [ENTER] para continuar.");
+                Console.ReadKey();
+                return "";
+            }
+        }
+
+        public int GetAssentos(string voo)
+        {
+            string queryString = $"SELECT ID, AssentosOcupados FROM Voo WHERE ID = '{voo}';";
+
+            int valor = 0;
+
+            try
+            {
+                SqlCommand command = new SqlCommand(queryString, Conexaosql);
+
+                Conexaosql.Open();
+
+                using (SqlDataReader leitor = command.ExecuteReader())
+                {
+                    while (leitor.Read())
+                    {
+                        valor = leitor.GetInt32(0);
                     }
                 }
                 Conexaosql.Close();

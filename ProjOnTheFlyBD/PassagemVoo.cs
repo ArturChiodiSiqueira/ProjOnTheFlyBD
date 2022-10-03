@@ -132,7 +132,7 @@ namespace ProjOnTheFlyBD
             if (BuscaIdVoo())
             {
                 Console.WriteLine(">>> ALTERAR DADOS DE PASSAGEM <<<");
-                
+
                 int opcao = 7;
 
                 string query = $"SELECT ID,IDVoo,DataUltimaOperacao,Valor,Situacao FROM PassagemVoo WHERE IDVoo = '{IdVoo}' and Situacao  ='L'";
@@ -207,4 +207,3 @@ namespace ProjOnTheFlyBD
         }
     }
 }
-

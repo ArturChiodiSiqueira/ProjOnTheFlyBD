@@ -31,7 +31,6 @@ namespace ProjOnTheFlyBD
             return $"{Cpf}{Nome}{DataNascimento}{Sexo}{UltimaCompra}{DataCadastro}{Situacao}";
         }
 
-        //Cadastra o CPF
         public bool CadastraCpf()
         {
             do
@@ -58,7 +57,6 @@ namespace ProjOnTheFlyBD
             return true;
         }
 
-        //Cadastra o Nome
         public bool CadastraNome()
         {
             do
@@ -76,7 +74,6 @@ namespace ProjOnTheFlyBD
             return true;
         }
 
-        //Cadastra a data de nascimento
         public bool CadastraDataNasc()
         {
             Console.Write("Digite sua data de nascimento (Mes/Dia/Ano): ");
@@ -90,7 +87,6 @@ namespace ProjOnTheFlyBD
             return true;
         }
 
-        //Cadastra o sexo do passageiro
         public bool CadastraSexo()
         {
             do
@@ -108,7 +104,6 @@ namespace ProjOnTheFlyBD
             return true;
         }
 
-        //Altera a situação do cadastro do passageiro
         public bool AlteraSituacao()
         {
             string num;
@@ -129,7 +124,6 @@ namespace ProjOnTheFlyBD
             return true;
         }
 
-        //Cadastra um novo passageiro
         public void CadastraPassageiro()
         {
             Console.WriteLine(">>> CADASTRO DE PASSAGEIRO <<<");
@@ -160,7 +154,6 @@ namespace ProjOnTheFlyBD
             Console.ReadKey();
         }
 
-        //Altera o cadastro do passageiro
         public void AlteraDadoPassageiro()
         {
             bool verificacao;
@@ -207,7 +200,6 @@ namespace ProjOnTheFlyBD
                 if (num.Contains("0"))
                     return;
 
-                //Condição para alterar o dado em específico do passageiro
                 switch (num)
                 {
                     case "1":
@@ -311,7 +303,6 @@ namespace ProjOnTheFlyBD
             return true;
         }
 
-        //Imprime todos os passageiros
         public void ImprimiPassageiro()
         {
             int opcao = 1;
@@ -322,6 +313,3 @@ namespace ProjOnTheFlyBD
         }
     }
 }
-
-
-

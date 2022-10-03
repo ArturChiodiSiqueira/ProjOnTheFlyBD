@@ -84,7 +84,7 @@ namespace ProjOnTheFlyBD
                 Console.Write("Informe o código de identificação da aeronave seguindo o padrão definido pela ANAC (XX-XXX): ");
                 Inscricao = Console.ReadLine().ToUpper().Trim().Replace("-", "");
             } while (Inscricao.Length != 5);
-            
+
             return true;
         }
 

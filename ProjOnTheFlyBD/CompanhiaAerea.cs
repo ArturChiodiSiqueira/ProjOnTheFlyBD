@@ -28,7 +28,6 @@ namespace ProjOnTheFlyBD
             return $"{Cnpj}{RazaoSocial}{DataAbertura}{UltimoVoo}{DataCadastro}{Situacao}";
         }
 
-        //Cadastra CNPJ
         public bool CadCNPJ()
         {
             do
@@ -55,7 +54,6 @@ namespace ProjOnTheFlyBD
             return true;
         }
 
-        //Cadastra Data de Abertura
         public bool CadDataAbertura()
         {
             Console.Write("Digite a data de abertura (Dia/Mes/Ano): ");
@@ -77,7 +75,6 @@ namespace ProjOnTheFlyBD
             return true;
         }
 
-        //Cadastra a Razão Social
         public bool CadRazao()
         {
             Console.Write("Digite a Razão Social:  (Max 50 caracteres): ");
@@ -96,7 +93,6 @@ namespace ProjOnTheFlyBD
             return true;
         }
 
-        //Altera a situação da Companhia 
         public bool AlteraSituacao()
         {
             string num;
@@ -117,7 +113,6 @@ namespace ProjOnTheFlyBD
             return true;
         }
 
-        //Cadastra uma nova Companhia Aerea
         public void CadCompanhia()
         {
             Console.WriteLine(">>> CADSTRO DE COMPANHIA AEREA <<<");
@@ -190,7 +185,6 @@ namespace ProjOnTheFlyBD
                 if (num.Contains("0"))
                     return;
 
-                //Condição para alterar o dado em específico da Companhia
                 switch (num)
                 {
                     case "1":
@@ -218,7 +212,6 @@ namespace ProjOnTheFlyBD
             }
         }
 
-        //Imprime todas as companhias
         public void ImprCompanhia()
         {
             int opcao = 3;
@@ -228,7 +221,6 @@ namespace ProjOnTheFlyBD
             conn.Select(query, opcao);
         }
 
-        ////Verifica O CNPJ se é válido
         public bool ValidaCNPJ(string vrCNPJ)
         {
             string CNPJ = vrCNPJ.Replace(".", "");
@@ -284,7 +276,6 @@ namespace ProjOnTheFlyBD
                         CNPJOk[nrDig] = (
                         digitos[12 + nrDig] == (
                         11 - resultado[nrDig]));
-
                 }
                 return (CNPJOk[0] && CNPJOk[1]);
             }
