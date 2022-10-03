@@ -53,16 +53,17 @@ Situacao char(1) not null
 );
 
 create table Venda (
-ID varchar(50) not null primary key,
+ID int identity not null primary key,
 Cpf varchar(11) foreign key references Passageiro(Cpf) not null,
 DataVenda varchar(50) not null,
 TotalVendas varchar(50) not null
 );
+
 create table ItemVenda (
-ID varchar(50) not null primary key,
-IDVenda varchar(50) foreign key references Venda(ID) not null,
+ID int identity not null primary key,
+IDVenda int identity foreign key references Venda(ID) not null,
 IDPassagem varchar(6) foreign key references PassagemVoo(ID) not null,
-ValorUnitario varchar(50) not null
+ValorUnitario float not null
 );
 
 create table CadastroBloqueados (

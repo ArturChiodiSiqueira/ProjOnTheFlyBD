@@ -292,5 +292,36 @@ namespace ProjOnTheFlyBD
                 return 0;
             }
         }
+
+        public double GetValor(string IdPassagemVoo)
+        {
+            string queryString = $"SELECT ID, IDVoo, DataUltimaOperacao, Valor, Situacao FROM PassagemVoo WHERE ID = '{IdPassagemVoo}';";
+
+            double valor = 0;
+
+            try
+            {
+                SqlCommand command = new SqlCommand(queryString, Conexaosql);
+
+                Conexaosql.Open();
+
+                using (SqlDataReader reader = command.ExecuteReader())
+                {
+                    while (reader.Read())
+                    {
+                        valor = reader.GetDouble(2);
+                    }
+                }
+                Conexaosql.Close();
+                return valor;
+            }
+            catch (Exception e)
+            {
+                Conexaosql.Close();
+                Console.WriteLine("Erro ao comunicar com o banco\n" + e.Message + "\nTecle [ENTER] para continuar.");
+                Console.ReadKey();
+                return 0;
+            }
+        }
     }
 }

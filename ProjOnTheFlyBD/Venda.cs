@@ -134,10 +134,10 @@ namespace ProjOnTheFlyBD
             }
             DataVenda = DateTime.Now.ToString("ddMMyyyy");
 
-            ItemVenda item = new(Id);
+            ItemVenda item = new();
 
 
-            ValorTotal = item.CadastrarItemVenda();
+            ValorTotal = item.ComprarItemVenda();
 
             string texto = $"{ToString()}\n";
             File.AppendAllText(caminhoVenda, texto);

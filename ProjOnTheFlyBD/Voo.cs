@@ -253,59 +253,5 @@ namespace ProjOnTheFlyBD
                 Thread.Sleep(3000);
             }
         }
-
-
-        //public void ImprimeVoos()
-        //{
-        //    string[] lines = File.ReadAllLines(Caminho);
-        //    List<string> voos = new();
-
-        //    for (int i = 1; i < lines.Length; i++)
-        //    {
-        //        if (lines[i].Substring(33, 1).Contains("A"))
-        //            voos.Add(lines[i]);
-        //    }
-
-        //    for (int i = 0; i < voos.Count; i++)
-        //    {
-        //        string op;
-        //        do
-        //        {
-        //            Console.Clear();
-        //            Console.WriteLine(">>> Cadastro Voos <<<\nDigite para navegar:\n[1] Próximo Cadasatro\n[2] Cadastro Anterior" +
-        //                "\n[3] Último cadastro\n[4] Voltar ao Início\n[0] Sair\n");
-
-        //            Console.WriteLine($"Cadastro [{i + 1}] de [{voos.Count}]");
-
-        //            ImprimeVoo(Caminho, voos[i].Substring(0, 5));
-
-        //            Console.Write("Opção: ");
-        //            op = Console.ReadLine();
-
-        //            if (op != "0" && op != "1" && op != "2" && op != "3" && op != "4")
-        //            {
-        //                Console.WriteLine("Opção inválida!");
-        //                Thread.Sleep(2000);
-        //            }
-
-        //            else if (op.Contains("0"))
-        //                return;
-
-        //            else if (op.Contains("2"))
-        //                if (i == 0)
-        //                    i = 0;
-        //                else
-        //                    i--;
-
-        //            else if (op.Contains("3"))
-        //                i = voos.Count - 1;
-
-        //            else if (op.Contains("4"))
-        //                i = 0;
-
-        //        } while (op != "1");
-        //        i = 0;
-        //    }
-        //}
     }
 }

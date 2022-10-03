@@ -209,54 +209,5 @@ namespace ProjOnTheFlyBD
             string query = "SELECT * FROM Aeronave";
             conn.Select(query, opcao);
         }
-
-        //public void ImprimeAeronaves()
-        //{
-        //    string[] lines = File.ReadAllLines(Caminho);
-        //    List<string> aeronaves = new();
-        //    for (int i = 0; i < lines.Length; i++)
-        //    {
-        //        //Verifica se o cadastro esta ativo
-        //        if (lines[i].Substring(27, 1).Contains("A"))
-        //            aeronaves.Add(lines[i]);
-        //    }
-        //    //Laço para navegar nos cadastros de aeronaves
-        //    for (int i = 0; i < aeronaves.Count; i++)
-        //    {
-        //        string op;
-        //        do
-        //        {
-        //            Console.Clear();
-        //            Console.WriteLine(">>> Cadastro Aeronaves <<<\nDigite para navegar:\n[1] Próximo Cadasatro\n[2] Cadastro Anterior" +
-        //                "\n[3] Último cadastro\n[4] Voltar ao Início\n[0] Sair\n");
-        //            Console.WriteLine($"Cadastro [{i + 1}] de [{aeronaves.Count}]");
-        //            //Imprimi o primeiro da lista
-        //            ImprimeAeronave(Caminho, aeronaves[i].Substring(0, 5));
-        //            Console.Write("Opção: ");
-        //            op = Console.ReadLine();
-        //            if (op != "0" && op != "1" && op != "2" && op != "3" && op != "4")
-        //            {
-        //                Console.WriteLine("Opção inválida!");
-        //                Thread.Sleep(2000);
-        //            }
-        //            //Sai do método
-        //            else if (op.Contains("0"))
-        //                return;
-        //            //Volta no Cadastro Anterior
-        //            else if (op.Contains("2"))
-        //                if (i == 0)
-        //                    i = 0;
-        //                else
-        //                    i--;
-        //            //Vai para o fim da lista
-        //            else if (op.Contains("3"))
-        //                i = aeronaves.Count - 1;
-        //            //Volta para o inicio da lista
-        //            else if (op.Contains("4"))
-        //                i = 0;
-        //            //Vai para o próximo da lista
-        //        } while (op != "1");
-        //    }
-        //}
     }
 }

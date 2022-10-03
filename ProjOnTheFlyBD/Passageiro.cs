@@ -321,67 +321,6 @@ namespace ProjOnTheFlyBD
             conn.Select(query, opcao);
         }
     }
-
-    /*
-    //Imprimi os passageiros cadastrados e ativos
-    public void ImprimiPassageiros()
-    {
-        string[] lines = File.ReadAllLines(caminho);
-        List<string> passageiros = new();
-
-        for(int i = 1; i < lines.Length; i++)   
-        {
-            //Verifica se o cadastro esta ativo
-            if (lines[i].Substring(87, 1).Contains("A"))
-                passageiros.Add(lines[i]);
-        }
-
-        //Laço para navegar nos cadastros de passageitos
-        for (int i = 0; i < passageiros.Count; i++)
-        {
-            string op;
-            do
-            {
-                Console.Clear();
-                Console.WriteLine(">>> Cadastro Passageiros <<<\nDigite para navegar:\n[1] Próximo Cadasatro\n[2] Cadastro Anterior" +
-                    "\n[3] Último cadastro\n[4] Voltar ao Início\n[s] Sair\n");
-
-                Console.WriteLine($"Cadastro [{i+1}] de [{passageiros.Count}]");
-                //Imprimi o primeiro da lista 
-                LocalizaPassageiro(caminho, passageiros[i].Substring(0, 11));
-
-                Console.Write("Opção: ");
-                op = Console.ReadLine();
-
-                if (op != "1" && op != "2" && op != "3" && op != "4" && op != "s")
-                {
-                    Console.WriteLine("Opção inválida!");
-                    Thread.Sleep(2000);
-                }
-                //Sai do método
-                else if (op.Contains("s"))
-                    return;
-
-                //Volta no Cadastro Anterior
-                else if (op.Contains("2"))
-                    if (i == 0)
-                        i = 0;
-                    else
-                        i--;
-
-                //Vai para o fim da lista
-                else if (op.Contains("3"))
-                    i = passageiros.Count-1;
-
-                //Volta para o inicio da lista
-                else if (op.Contains("4"))
-                    i = 0;
-            //Vai para o próximo da lista    
-            } while (op != "1");
-            if (i == passageiros.Count - 1)
-                i--;
-
-        }   */
 }
 
 
