@@ -139,7 +139,7 @@ namespace ProjOnTheFlyBD
             bool verificacao;
             string inscricao;
 
-            Console.WriteLine(">>> ALTERAR DADOS DE AERONAVE <<<\nPara sair digite 's'.\n");
+            Console.WriteLine(">>> ALTERAR DADOS DE AERONAVE <<<");
 
             do
             {

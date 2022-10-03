@@ -186,7 +186,7 @@ namespace ProjOnTheFlyBD
         {
             bool verificacao;
             string id;
-            Console.WriteLine(">>> ALTERAR DADOS DE VOO <<<\nPara sair digite 'S'.\n");
+            Console.WriteLine(">>> ALTERAR DADOS DE VOO <<<");
             Console.Write("Digite o ID do voo: ");
             id = Console.ReadLine().ToUpper().Trim();
 

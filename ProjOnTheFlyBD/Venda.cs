@@ -41,7 +41,7 @@ namespace ProjOnTheFlyBD
 
         public void CadastrarVenda()
         {
-            Console.WriteLine("VENDA DE PASSAGENS\nDigite 0 para sair");
+            Console.WriteLine("VENDA DE PASSAGENS");
             DataVenda = DateTime.Now.ToString("dd/MM/yyyy");
 
             string novoAssento, voo, query, aeronave, cpf, attAeronave, idPassagem, numPassagens, opcao, atualizaPass;
@@ -54,11 +54,11 @@ namespace ProjOnTheFlyBD
 
                 if (cpf == "0") return;
 
-                if (conn.VerificaDados(cpf, "CPF", "Restritos"))
+                if (conn.VerificaDados(cpf, "Cpf", "CadastroRestritos"))
                     Console.WriteLine("CPF Bloqueado!");
                 else
                 {
-                    if (!conn.VerificaDados(cpf, "CPF", "Passageiro"))
+                    if (!conn.VerificaDados(cpf, "Cpf", "Passageiro"))
                         Console.WriteLine("CPF não cadastrado!");
                     else
                         break;
@@ -70,7 +70,7 @@ namespace ProjOnTheFlyBD
             {
                 do
                 {
-                    Console.Write("Quantas passagens deseja comprar(max 4): ");
+                    Console.Write("Quantas passagens irá comprar (max 4): ");
                     numPassagens = Console.ReadLine();
                     if (!int.TryParse(numPassagens, out num))
                         Console.WriteLine("Digite um valor válido");
@@ -88,7 +88,7 @@ namespace ProjOnTheFlyBD
 
                     if (idPassagem == "0") return;
 
-                    if (!conn.VerificaDados(idPassagem, "ID", "Passagem Voo"))
+                    if (!conn.VerificaDados(idPassagem, "ID", "PassagemVoo"))
                         Console.WriteLine("Passagem não encontrada!");
                     else
                         break;
@@ -106,13 +106,13 @@ namespace ProjOnTheFlyBD
                 }
                 else
                 {
-                    Console.WriteLine("Voo não possui mais passagens disponíveis!");
+                    Console.WriteLine("Não há passagens disponíveis!");
                     return;
                 }
 
                 do
                 {
-                    Console.Write("Deseja vender[V] ou reservar[R]?: ");
+                    Console.Write("[V] para VENDA ou [R] para RESERVA: ");
                     opcao = Console.ReadLine().ToUpper();
                     if (opcao != "V" && opcao != "R")
                         Console.WriteLine("Dado inválido!");
@@ -144,14 +144,14 @@ namespace ProjOnTheFlyBD
             query = $"INSERT INTO Venda(ID, Cpf, DataVenda, TotalVendas) VALUES ({ID}, '{Passageiro}', {DataVenda}, '{ValorTotal}');";
             conn.Insert(query);
 
-            Console.WriteLine("Passagens compradas/reservadas com sucesso");
+            Console.WriteLine("Operação concluida!");
             Thread.Sleep(2000);
         }
 
         public void ImprimeVenda()
         {
             int opcao = 9;
-            Console.WriteLine(">>> Vendas Cadastrados <<<");
+            Console.WriteLine(">>> Vendas Cadastradas <<<");
 
             string query = "SELECT * FROM Venda";
             conn.Select(query, opcao);

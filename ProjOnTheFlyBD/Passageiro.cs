@@ -158,7 +158,7 @@ namespace ProjOnTheFlyBD
         {
             bool verificacao;
 
-            Console.WriteLine(">>> ALTERAR DADOS DE PASSAGEIRO <<<\nPara sair digite 's'.\n");
+            Console.WriteLine(">>> ALTERAR DADOS DE PASSAGEIRO <<<");
             Console.Write("Digite o CPF do passageiro: ");
 
             string cpf;

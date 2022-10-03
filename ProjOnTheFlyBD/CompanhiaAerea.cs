@@ -45,7 +45,7 @@ namespace ProjOnTheFlyBD
                 {
                     if (conn.VerificaDados(Cnpj, "Cnpj", "CompanhiaAerea"))
                     {
-                        Console.WriteLine("Este CNPJ já está cadastrado!!");
+                        Console.WriteLine("Este CNPJ já está cadastrado!");
                         Thread.Sleep(2000);
                         Cnpj = "";
                     }
@@ -137,7 +137,7 @@ namespace ProjOnTheFlyBD
 
             conn.Insert(query);
 
-            Console.WriteLine("\nCADASTRO REALIZADO COM SUCESSO!\nPressione Enter para continuar...");
+            Console.WriteLine("\nCADASTRO REALIZADO COM SUCESSO!\nPressione [Enter] para continuar...");
             Console.ReadKey();
         }
 
@@ -145,7 +145,7 @@ namespace ProjOnTheFlyBD
         {
             bool verificacao;
 
-            Console.WriteLine(">>> ALTERAR DADOS DA COMPANHIA <<<\nPara sair digite 's'.\n");
+            Console.WriteLine(">>> ALTERAR DADOS DA COMPANHIA <<<");
             Console.Write("Digite o CNPJ da Companhia: ");
 
             string cnpj;

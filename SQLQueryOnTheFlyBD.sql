@@ -53,7 +53,7 @@ Situacao char(1) not null
 );
 
 create table Venda (
-ID int identity not null primary key,
+ID int not null primary key,
 Cpf varchar(11) foreign key references Passageiro(Cpf) not null,
 DataVenda Date not null,
 TotalVendas float not null
@@ -61,7 +61,7 @@ TotalVendas float not null
 
 create table ItemVenda (
 ID int identity not null primary key,
-IDVenda int identity foreign key references Venda(ID) not null,
+IDVenda int foreign key references Venda(ID) not null,
 IDPassagem varchar(6) foreign key references PassagemVoo(ID) not null,
 ValorUnitario float not null
 );
