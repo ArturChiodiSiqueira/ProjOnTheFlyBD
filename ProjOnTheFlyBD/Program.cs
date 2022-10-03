@@ -105,28 +105,33 @@ namespace ProjOnTheFlyBD
                         Console.WriteLine(" Cadastrar passageiro");
                         Console.Clear();
                         passageiro.CadastraPassageiro();
+                        MostrarMenuInicial();
                         break;
                     case 2:
                         Console.WriteLine(" Cadastrar companhia aerea");
                         Console.Clear();
                         companhiaAerea.CadCompanhia();
+                        MostrarMenuInicial();
                         break;
                     case 3:
                         Console.WriteLine(" Cadastrar aeronave");
                         Console.Clear();
                         aeronave.CadastraAeronave();
+                        MostrarMenuInicial();
                         break;
 
                     case 4:
                         Console.WriteLine(" Cadastro de voo");
                         Console.Clear();
                         voo.CadastrarVoo();
+                        MostrarMenuInicial();
                         break;
 
                     case 5:
                         Console.WriteLine(" Cadastrar venda de passagem");
                         Console.Clear();
                         venda.Cadastrar();
+                        MostrarMenuInicial();
                         break;
                     case 6:
                         Console.WriteLine(" Menu Inicial");
@@ -180,30 +185,35 @@ namespace ProjOnTheFlyBD
                         Console.WriteLine("Editar passageiro");
                         Console.Clear();
                         passageiro.AlteraDadoPassageiro();
+                        MostrarMenuInicial();
                         break;
 
                     case 2:
                         Console.WriteLine("Editar companhia aerea");
                         Console.Clear();
                         companhiaAerea.AlteraCompanhia();
+                        MostrarMenuInicial();
                         break;
 
                     case 3:
                         Console.WriteLine("Editar aeronave");
                         Console.Clear();
                         aeronave.AlteraDadoAeronave();
+                        MostrarMenuInicial();
                         break;
 
                     case 4:
                         Console.WriteLine("Editar voo");
                         Console.Clear();
                         voo.AlteraDadoVoo();
+                        MostrarMenuInicial();
                         break;
 
                     case 5:
                         Console.WriteLine("Editar passagem");
                         Console.Clear();
                         passagemVoo.AlteraDadoPassagem();
+                        MostrarMenuInicial();
                         break;
 
                     case 6:
@@ -215,7 +225,6 @@ namespace ProjOnTheFlyBD
                         Console.Write("\n Opcao Inválida!\n Digite novamente: ");
                         break;
                 }
-
             } while (true);
         }
 
@@ -262,36 +271,42 @@ namespace ProjOnTheFlyBD
                         Console.WriteLine("Imprime passageiro");
                         Console.Clear();
                         passageiro.ImprimiPassageiro();
+                        MostrarMenuInicial();
                         break;
 
                     case 2:
                         Console.WriteLine("Imprime companhia aerea");
                         Console.Clear();
                         companhiaAerea.ImprCompanhia();
+                        MostrarMenuInicial();
                         break;
 
                     case 3:
                         Console.WriteLine("Imprime aeronave");
                         Console.Clear();
                         aeronave.ImprimeAeronave();
+                        MostrarMenuInicial();
                         break;
 
                     case 4:
                         Console.WriteLine("Imprime voo");
                         Console.Clear();
                         voo.ImprimeVoo();
+                        MostrarMenuInicial();
                         break;
 
                     case 5:
                         Console.WriteLine("Imprime passagem");
                         Console.Clear();
                         passagemVoo.imprimePassagem();
+                        MostrarMenuInicial();
                         break;
 
                     case 6:
                         Console.WriteLine("Imprime venda de passagem");
                         Console.Clear();
                         venda.Imprimir();
+                        MostrarMenuInicial();
                         break;
 
                     case 7:
@@ -303,7 +318,6 @@ namespace ProjOnTheFlyBD
                         Console.Write("\n Opcao Inválida!\n Digite novamente: ");
                         break;
                 }
-
             } while (true);
         }
 
@@ -341,12 +355,14 @@ namespace ProjOnTheFlyBD
                         Console.WriteLine("Restringir CPF");
                         Console.Clear();
                         rest.GerarMenu();
+                        MostrarMenuInicial();
                         break;
 
                     case 2:
                         Console.WriteLine("Bloquear CNPJ");
                         Console.Clear();
                         bloq.GerarMenu();
+                        MostrarMenuInicial();
                         break;
 
                     case 3:
@@ -358,7 +374,6 @@ namespace ProjOnTheFlyBD
                         Console.Write("\n Opcao Inválida!\n Digite novamente: ");
                         break;
                 }
-
             } while (true);
         }
     }
