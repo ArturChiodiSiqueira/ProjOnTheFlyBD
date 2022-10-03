@@ -31,7 +31,6 @@ namespace ProjOnTheFlyBD
                 try
                 {
                     opc = int.Parse(Console.ReadLine());
-
                 }
                 catch (Exception)
                 {
