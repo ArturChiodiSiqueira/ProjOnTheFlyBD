@@ -9,8 +9,6 @@ using System.Threading.Tasks;
 
 namespace ProjOnTheFlyBD
 {
-
-
     internal class Bloqueado
     {
         public string Cnpj { get; set; }

@@ -10,7 +10,6 @@ namespace ProjOnTheFlyBD
 {
     internal class Venda
     {
-
         public int Id { get; set; }
         public string DataVenda { get; set; }
         public string Passageiro { get; set; }
@@ -28,34 +27,25 @@ namespace ProjOnTheFlyBD
 
         }
 
-
-
-
-
         public Venda(int id, string dataVenda, string passageiro, string valorTotal)
         {
             Id = id;
             DataVenda = dataVenda;
             Passageiro = passageiro;
             ValorTotal = valorTotal;
-
         }
 
         public bool BuscarPassageiro()
         {
-
             Console.WriteLine("Digite o cpf:");
             string cpf = Console.ReadLine().Replace(".", "").Replace("-", "");
             foreach (string line in File.ReadLines(caminhorestrito))
             {
-
                 if (line.Contains(cpf))
                 {
                     Console.WriteLine("CPF Restrito. Contate a Receita Federal para maiores informações");
                     return false;
                 }
-
-
             }
             foreach (string line in File.ReadLines(caminhoPassageiro))
             {
@@ -68,8 +58,6 @@ namespace ProjOnTheFlyBD
                         Console.ReadKey();
                         return false;
                     }
-
-
                     Console.WriteLine($"CPF: {line.Substring(0, 11)}");
                     Console.WriteLine($"Nome: {line.Substring(11, 50)}");
                     Console.WriteLine($"Data de Nascimento: {line.Substring(62, 2)}/{line.Substring(64, 2)}/{line.Substring(66, 4)}");
@@ -92,14 +80,9 @@ namespace ProjOnTheFlyBD
                     {
                         return false;
                     }
-
-
                 }
-
             }
-
             return false;
-
         }
 
         protected int GetID()
@@ -119,13 +102,9 @@ namespace ProjOnTheFlyBD
             idPessoa.Close();
         }
 
-
-
-
         public void Cadastrar()
         //Metodo para cadastrar venda ou reserva, quando realizar uma venda/reserva, esse metodo é chamado
         {
-
             Id = GetID();
 
             if (!BuscarPassageiro())
@@ -136,7 +115,6 @@ namespace ProjOnTheFlyBD
 
             ItemVenda item = new();
 
-
             ValorTotal = item.ComprarItemVenda();
 
             string texto = $"{ToString()}\n";
@@ -145,14 +123,9 @@ namespace ProjOnTheFlyBD
             SaveID(Id);
             Console.WriteLine("Venda realizada com sucesso!\nPressione qualquer tecla para continuar...");
             Console.ReadKey();
-
-
         }
 
-
-
         public void Imprimir()
-
         {
             string[] lines = File.ReadAllLines(caminhoVenda);
             List<string> venda = new();
@@ -176,11 +149,8 @@ namespace ProjOnTheFlyBD
                     string[] vendas = File.ReadAllLines(caminhoVenda);
                     string[] itemVenda = File.ReadAllLines(caminhoitemvenda);
 
-
                     for (int j = 1; j < vendas.Length; j++)
                     {
-
-
                         Console.WriteLine($"\nID DA VENDA: {vendas[j].Substring(0, 5)} ");
                         Console.WriteLine($"CPF DO PASSAGEIRO COMPRADOR : {vendas[j].Substring(5, 11)}");
                         Console.WriteLine($"DATA DA VENDA: {vendas[j].Substring(16, 2)}/{vendas[j].Substring(18, 2)}/ {vendas[j].Substring(20, 4)}");
@@ -190,25 +160,18 @@ namespace ProjOnTheFlyBD
                         {
                             try
                             {
-
-
                                 if (itemVenda[l].Substring(1, 5).Contains(vendas[l].Substring(0, 5)))
                                 {
-
                                     Console.WriteLine($"\nID item venda: {itemVenda[l].Substring(0, 5)} ");
                                     Console.WriteLine($"ID da passagem : {itemVenda[l].Substring(5, 6)}");
                                     Console.WriteLine($"Valor unitario: R${itemVenda[l].Substring(11, 6)}");
-
                                 }
                             }
                             catch
                             {
                                 break;
                             }
-
-
                         }
-
                     }
 
                     Console.Write("Opção: ");
@@ -238,7 +201,6 @@ namespace ProjOnTheFlyBD
                 if (i == venda.Count - 1)
                     i--;
             }
-
         }
 
         public void Localizar()
@@ -249,7 +211,6 @@ namespace ProjOnTheFlyBD
             string cpf = Console.ReadLine();
             string[] venda = File.ReadAllLines(caminhoVenda);
             string[] itemVenda = File.ReadAllLines(caminhoitemvenda);
-
 
             for (int i = 1; i < venda.Length; i++)
             {
@@ -264,48 +225,30 @@ namespace ProjOnTheFlyBD
                     {
                         try
                         {
-
-
                             if (itemVenda[j].Substring(1, 5).Contains(venda[i].Substring(0, 5)))
                             {
-
                                 Console.WriteLine($"\nID item venda: {itemVenda[i].Substring(0, 5)} ");
                                 Console.WriteLine($"ID da passagem : {itemVenda[i].Substring(5, 6)}");
                                 Console.WriteLine($"Valor unitario: R${itemVenda[i].Substring(11, 6)}");
-
                             }
                         }
                         catch
                         {
                             break;
                         }
-
-
                     }
-
-
                 }
             }
-
-
-
-
         }
 
         public void Cancelar()
         //metodo para cancelar as reservas
         {
-
         }
 
         public override string ToString()
         {
             return $"{Id.ToString("00000")}{Passageiro}{DataVenda}{ValorTotal}";
-
-
         }
-
-
-
     }
 }
