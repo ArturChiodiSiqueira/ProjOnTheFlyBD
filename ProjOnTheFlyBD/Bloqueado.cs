@@ -20,7 +20,6 @@ namespace ProjOnTheFlyBD
             int opc = 6;
             bool retorna = true;
 
-            //BloquearCnpj();
             Console.WriteLine("Digite a opção: \n" +
                 "1 - Adicionar CNPJ\n" +
                 "2 - Verificar CNPJ\n" +
@@ -45,18 +44,27 @@ namespace ProjOnTheFlyBD
                         break;
                     case 1:
                         BloquearCnpj();
+                        Console.Clear();
+                        GerarMenu();
                         break;
                     case 2:
                         VerificarCnpj();
+                        Console.Clear();
+                        GerarMenu();
                         break;
                     case 3:
                         DesbloquearCnpj();
+                        Console.Clear();
+                        GerarMenu();
                         break;
                     case 4:
                         ListarCnpj();
+                        Console.Clear();
+                        GerarMenu();
                         break;
                     case 5:
                         retorna = false;
+                        GerarMenu();
                         break;
                     default: break;
                 }
@@ -75,20 +83,22 @@ namespace ProjOnTheFlyBD
                 valida = ValidarCNPJ(cnpj);
                 if (valida)
                 {
-                    string query = $"SELECT Cnpj FROM Bloqueado WHERE Cnpj ={cnpj}";
+                    string query = $"SELECT Cnpj FROM CadastroBloqueados WHERE Cnpj ={cnpj}";
                     verificacao = conn.Select(query, opc);
                     if (verificacao)
                     {
-                        Console.WriteLine("CNPJ Bloqurado!");
+                        Console.WriteLine("CNPJ Bloqueado!");
                     }
                     else
                     {
                         Console.WriteLine($"\n '{cnpj}' não bloqueado!");
                     }
+                    Console.ReadKey();
                 }
                 else if (!valida)
                 {
                     Console.WriteLine("CNPJ invalido!");
+                    Thread.Sleep(2000);
                 }
             } while (valida == false);
         }
@@ -104,7 +114,7 @@ namespace ProjOnTheFlyBD
 
                 if (valida)
                 {
-                    string query = $"INSERT INTO Bloqueado (Cnpj) VALUES('{cnpj}')";
+                    string query = $"INSERT INTO CadastroBloqueados (Cnpj) VALUES('{cnpj}')";
                     conn.Insert(query);
                     Console.WriteLine("\nCNPJ Bloqueado com sucesso!");
                     Console.ReadKey();
@@ -112,6 +122,7 @@ namespace ProjOnTheFlyBD
                 else if (!valida)
                 {
                     Console.WriteLine("CNPJ invalido");
+                    Thread.Sleep(2000);
                 }
             } while (valida == false);
         }
@@ -121,8 +132,9 @@ namespace ProjOnTheFlyBD
             int opc = 5;
             Console.Clear();
             Console.WriteLine("Cnpj Bloqueados:");
-            string query = $"SELECT Cnpj FROM Bloqueado ";
+            string query = $"SELECT Cnpj FROM CadastroBloqueados ";
             conn.Select(query, opc);
+            Console.ReadKey();
         }
 
         public void DesbloquearCnpj()
@@ -137,7 +149,7 @@ namespace ProjOnTheFlyBD
 
                 if (valida)
                 {
-                    string query = $"DELETE FROM Bloqueado WHERE Cnpj=('{cnpj}')";
+                    string query = $"DELETE FROM CadastroBloqueados WHERE Cnpj=('{cnpj}')";
                     conn.Delete(query);
                     Console.WriteLine($"\n'{cnpj}' Removido da lista de bloqueados.");
                     Console.ReadKey();
@@ -145,6 +157,7 @@ namespace ProjOnTheFlyBD
                 else if (valida == false)
                 {
                     Console.WriteLine("CNPJ invalido");
+                    Thread.Sleep(2000);
                 }
             } while (valida == false);
         }

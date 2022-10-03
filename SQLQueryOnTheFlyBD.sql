@@ -67,11 +67,11 @@ ValorUnitario float not null
 );
 
 create table CadastroBloqueados (
-Cpf varchar(50) not null primary key
+Cnpj varchar(50) not null primary key
 );
 
 create table CadastroRestritos (
-Cnpj varchar(50) not null primary key
+Cpf varchar(50) not null primary key
 );
 
 create table Aeroporto (

@@ -44,18 +44,27 @@ namespace ProjOnTheFlyBD
                         break;
                     case 1:
                         AddRestricaoCpf();
+                        Console.Clear();
+                        GerarMenu();
                         break;
                     case 2:
                         VerificarCpf();
+                        Console.Clear();
+                        GerarMenu();
                         break;
                     case 3:
                         RetirarRestricaoCpf();
+                        Console.Clear();
+                        GerarMenu();
                         break;
                     case 4:
                         ListarCpf();
+                        Console.Clear();
+                        GerarMenu();
                         break;
                     case 5:
                         retorna = false;
+                        GerarMenu();
                         break;
                     default: break;
                 }
@@ -75,7 +84,7 @@ namespace ProjOnTheFlyBD
                     valida = ValidarCPF(cpf);
                     if (valida)
                     {
-                        string query = $"SELECT Cpf FROM Restrito WHERE Cpf ={cpf}";
+                        string query = $"SELECT Cpf FROM CadastroRestritos WHERE Cpf ={cpf}";
                         verificacao = conn.Select(query, opc);
                         if (verificacao)
                         {
@@ -85,12 +94,12 @@ namespace ProjOnTheFlyBD
                         {
                             Console.WriteLine($"\n '{cpf}' não restrito!");
                         }
-                        Console.WriteLine("\n CPF foi adicionado a lista de bloqueado");
                         Console.ReadKey();
                     }
                     else if (!valida)
                     {
                         Console.WriteLine(" CPF invalido");
+                        Thread.Sleep(2000);
                     }
                 } while (valida == false);
             }
@@ -101,20 +110,21 @@ namespace ProjOnTheFlyBD
             bool valida;
             do
             {
-                Console.Write(" Digite o CPF que será restringido: ");
+                Console.Write("Digite o CPF que será restringido: ");
                 string cpf = Console.ReadLine().Replace(".", "").Replace("-", "");
                 valida = ValidarCPF(cpf);
                 if (valida)
                 {
 
-                    string query = $"INSERT INTO Restrito (Cpf) VALUES('{cpf}')";
+                    string query = $"INSERT INTO CadastroRestritos (Cpf) VALUES('{cpf}')";
                     conn.Insert(query);
                     Console.WriteLine("CPF Restringido com sucesso!");
                     Console.ReadKey();
                 }
                 else if (valida == false)
                 {
-                    Console.WriteLine(" CPF invalido");
+                    Console.WriteLine("CPF invalido");
+                    Thread.Sleep(2000);
                 }
             } while (valida == false);
         }
@@ -124,8 +134,9 @@ namespace ProjOnTheFlyBD
             int opc = 2;
             Console.Clear();
             Console.WriteLine("Cpf Bloqueados:");
-            string query = $"SELECT Cpf FROM Restrito ";
+            string query = $"SELECT Cpf FROM CadastroRestritos ";
             conn.Select(query, opc);
+            Console.ReadKey();
         }
 
         public void RetirarRestricaoCpf()
@@ -138,14 +149,15 @@ namespace ProjOnTheFlyBD
                 valida = ValidarCPF(cpf);
                 if (valida)
                 {
-                    string query = $"DELETE FROM Restrito WHERE Cpf=('{cpf}')";
+                    string query = $"DELETE FROM CadastroRestritos WHERE Cpf=('{cpf}')";
                     conn.Insert(query);
                     Console.WriteLine($"\n'{cpf}' Removido da lista de restritos.");
                     Console.ReadKey();
                 }
                 else if (valida == false)
                 {
-                    Console.WriteLine(" CPF invalido");
+                    Console.WriteLine("CPF invalido");
+                    Thread.Sleep(2000);
                 }
             } while (valida == false);
         }
